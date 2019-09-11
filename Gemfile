@@ -24,6 +24,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
+  gem 'launchy'
 end
 
 group :development do
