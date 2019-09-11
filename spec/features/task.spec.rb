@@ -6,8 +6,8 @@ RSpec.feature "タスク管理機能", type: :feature do
   # scenario（itのalias）の中に、確認したい各項目のテストの処理を書きます。
   scenario "タスク一覧のテスト" do
     # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
-    Task.create!(title: 'test_task_01', content: 'testtesttest')
-    Task.create!(title: 'test_task_02', content: 'samplesample')
+    Task.create!(name: 'test_task_01', description: 'testtesttest')
+    Task.create!(name: 'test_task_02', description: 'samplesample')
 
     # tasks_pathにvisitする（タスク一覧ページに遷移する）
     visit tasks_path
@@ -15,10 +15,14 @@ RSpec.feature "タスク管理機能", type: :feature do
     # 実際の状況を確認したい場合(※ gem 'launchy'が必要)
     # 確認したい箇所にsave_and_open_pageをさし挟む。
     # この箇所の場合、「タスクが保存された後、タスク一覧ページに行くとどうなるのか」を確認できる
-    # save_and_open_page
+    save_and_open_page
 
     # visitした（到着した）expect(page)に（タスク一覧ページに）「testtesttest」「samplesample」という文字列が
     # have_contentされているか？（含まれているか？）ということをexpectする（確認・期待する）テストを書いている
+    # => タスク名欄(nameカラム)
+    expect(page).to have_content 'test_task_01'
+    expect(page).to have_content 'test_task_02'
+    # =>説明欄(descriptionカラム)
     expect(page).to have_content 'testtesttest'
     expect(page).to have_content 'samplesample'
 
@@ -33,7 +37,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     # new_task_pathにvisitする（タスク登録ページに遷移する）
     # 1.ここにnew_task_pathにvisitする処理を書く
 
-    # 「タスク名」というラベル名の入力欄と、「タスク詳細」というラベル名の入力欄に
+    # 「タスク名」というラベル名の入力欄(nameカラム)と、「説明」というラベル名の入力欄(descriptionカラム)に
     # タスクのタイトルと内容をそれぞれfill_in（入力）する
     # 2.ここに「タスク名」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
     # 3.ここに「タスク詳細」というラベル名の入力欄に内容をfill_in（入力）する処理を書く
