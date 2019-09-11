@@ -26,7 +26,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page).to have_content 'test_task_description_01'
     expect(page).to have_content 'test_task_description_02'
 
-    save_and_open_page
+    # save_and_open_page
 
     # わざと間違った結果を期待するテストも実施してみる
     # =>「間違えた記載内容の場合、テストも正しく間違う」ことができるかを確認する
@@ -60,11 +60,17 @@ RSpec.feature "タスク管理機能", type: :feature do
     # 5.タスク詳細ページに、テストコードで作成したはずのデータ（記述）がhave_contentされているか（含まれているか）を確認（期待）するコードを書く
     expect(page).to have_content 'test_task_name_03'
 
-    save_and_open_page
+    # save_and_open_page
 
   end
 
   scenario "タスク詳細のテスト" do
+
+    Task.create!(id: 4, name: 'test_task_name_04', description: 'test_task_description_04')
+
+    visit task_path(4)
+
+    # save_and_open_page
 
   end
 end
