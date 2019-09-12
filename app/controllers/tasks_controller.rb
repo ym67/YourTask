@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to @task, notice: 'タスクを作成しました。'
+      redirect_to @task, notice: t('controllers.tasks_controller.create.notice')
     else
       render :new
     end
@@ -26,7 +26,7 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to @task, notice: 'タスクを更新しました。'
+      redirect_to @task, notice: t('controllers.tasks_controller.update.notice')
     else
       render :edit
     end
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_url, notice: 'タスクを削除しました。'
+    redirect_to tasks_url, notice: t('controllers.tasks_controller.destroy.notice')
   end
 
   private
