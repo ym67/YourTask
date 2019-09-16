@@ -1,0 +1,9 @@
+<h1><%= t('views.tasks.new_html.title') %></h1>
+
+<br>
+
+<%= render 'form', task: @task %>
+
+<br>
+
+<%= link_to t('views.tasks.back'), tasks_path %>

@@ -1,0 +1,30 @@
+<h1><%= t('views.tasks.index_html.title') %></h1>
+
+<p id="notice"><%= notice %></p>
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= t('views.tasks.name') %></th>
+      <th><%= t('views.tasks.description') %></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= link_to task.name, task, class: 'task_name' %></td>
+        <td><%= task.description %></td>
+        <td><%= link_to t('views.tasks.edit'), edit_task_path(task) %></td>
+        <td><%= link_to t('views.tasks.destroy'), task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('views.tasks.create'), new_task_path %>
