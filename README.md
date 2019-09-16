@@ -62,7 +62,10 @@ $ git push origin トピックブランチ名
 13. 【Automatic deploys】と【Manual deploy】という欄が表示されていれば接続成功。【Automatic deploys】の欄で、正しいbranchが選択されているのを確認後、 **［Enable Automatic Deploys］** をクリックする。  
 ※ なお、【Manual deploy】の欄で［Deploy Branch］をクリックすれば、手動でデプロイも可能。  
 
-14. 画面右上の［Open app］をクリックするか、6で設定・作成したURLに直接アクセスし、アプリが正しく表示・起動していれば終了。  
+14. 画面右上の **［More］** をクリックし、プルダウンメニューから **［Run console］** をクリックする。
+表示されるコンソールで`rails db:migrate`を入力し、［Run］をクリックする。
+
+15. Herokuでのmigrateが完了後、画面右上の［Open app］をクリックするか、6で設定・作成したURLに直接アクセスし、アプリが正しく表示・起動していれば終了。  
 以後、GitHubの接続したリポジトリの該当ブランチに新しいコミットがプッシュされるたび、自動でその内容がHerokuにプッシュ、デプロイされるようになる。  
 
 ## 仮モデル図（Step4）
