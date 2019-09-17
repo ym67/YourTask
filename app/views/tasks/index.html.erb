@@ -10,9 +10,10 @@
 <table>
   <thead>
     <tr>
+      <th>ステータス</th>
       <th><%= t('views.tasks.name') %></th>
       <th><%= t('views.tasks.description') %></th>
-      <th>終了期限</th>
+      <th><%= t('views.tasks.deadline') %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
+        <td><%= task.status %></td>
         <td><%= link_to task.name, task, class: 'task_name' %></td>
         <td><%= task.description %></td>
         <td><%= task.deadline %></td>

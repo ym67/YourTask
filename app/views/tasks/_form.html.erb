@@ -25,6 +25,11 @@
     <%= form.datetime_field :deadline %>
   </div>
 
+  <div class="field">
+    <%= form.label :status, id: "task_status"  %>
+    <%= form.select :status, [ ["未着手", 0],["着手中", 1],["完了", 2] ] %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
