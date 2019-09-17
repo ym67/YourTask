@@ -3,6 +3,7 @@ ja:
     tasks:
       name: タスク名
       description: 説明
+      deadline: 終了期限
       create: 新規作成
       show: 詳細
       edit: 編集
