@@ -8,3 +8,4 @@ ja:
         description: 説明
         deadline: 終了期限
         status: ステータス
+        task_search: タスク検索
