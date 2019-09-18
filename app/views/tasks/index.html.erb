@@ -4,25 +4,31 @@
 
 <br>
 
-<%= link_to "作成日時順", tasks_path %>
-<%= link_to "終了期限順", tasks_path(sort_expired: "deadline") %>
+<%= search_form_for @query do |form| %>
+  <%= form.select :status_eq, Task.statuses.map{|key, value| [Task.statuses_i18n[key], value]}, include_blank: '指定なし' %>
+  <%= form.search_field :name_cont, placeholder: "タスク名" %>
+  <%= form.submit "検索" %>
+<% end %>
 
 <table>
   <thead>
     <tr>
-      <th><%= t('views.tasks.name') %></th>
-      <th><%= t('views.tasks.description') %></th>
-      <th>終了期限</th>
+      <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
+      <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
+      <th><%= sort_link(@query, :description, t('views.tasks.description')) %></th>
+      <th><%= sort_link(@query, :description, t('views.tasks.deadline')) %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
+
     <% @tasks.each do |task| %>
       <tr>
+        <td><%= task.status_i18n %></td>
         <td><%= link_to task.name, task, class: 'task_name' %></td>
         <td><%= task.description %></td>
-        <td><%= task.deadline %></td>
+        <td><%= task.deadline.strftime("%Y-%m-%d") %></td>
         <td><%= link_to t('views.tasks.edit'), edit_task_path(task) %></td>
         <td><%= link_to t('views.tasks.destroy'), task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
       </tr>

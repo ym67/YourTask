@@ -4,9 +4,10 @@
 
 <br>
 
+<p><%= t('views.tasks.name') %>：<strong><%= @task.status_i18n %></strong></p>
 <p><%= t('views.tasks.name') %>：<strong><%= @task.name %></strong></p>
 <p><%= t('views.tasks.description') %>：<strong><%= @task.description %></strong></p>
-<p>終了期限：<strong><%= @task.deadline %></strong></p>
+<p><%= t('views.tasks.deadline') %>：<strong><%= @task.deadline.strftime("%Y-%m-%d") %></strong></p>
 
 
 <br>

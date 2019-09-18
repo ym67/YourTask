@@ -4,6 +4,7 @@ ja:
       name: タスク名
       description: 説明
       deadline: 終了期限
+      status: ステータス
       create: 新規作成
       show: 詳細
       edit: 編集
