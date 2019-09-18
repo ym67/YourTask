@@ -5,6 +5,7 @@ ja:
       description: 説明
       deadline: 終了期限
       status: ステータス
+      priority: 優先順位
       create: 新規作成
       show: 詳細
       edit: 編集
