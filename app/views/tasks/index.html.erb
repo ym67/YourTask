@@ -30,7 +30,7 @@
         <td><%= task.status_i18n %></td>
         <td><%= link_to task.name, task, class: 'task_name' %></td>
         <td><%= task.description %></td>
-        <td><%= task.deadline %></td>
+        <td><%= task.deadline.strftime("%Y-%m-%d") %></td>
         <td><%= link_to t('views.tasks.edit'), edit_task_path(task) %></td>
         <td><%= link_to t('views.tasks.destroy'), task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
       </tr>
