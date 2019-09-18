@@ -2,8 +2,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @q = Task.ransack(params[:q])
-    @tasks = @q.result(distinct: true)
+    @query = Task.ransack(params[:q])
+    @tasks = @query.result(distinct: true).order(created_at: :desc)
   end
 
   def show
