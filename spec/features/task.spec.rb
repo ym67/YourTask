@@ -12,13 +12,16 @@ RSpec.feature "タスク管理機能", type: :feature do
 
     expect(page).to have_content 'タスク名カラム1'
     expect(page).to have_content '説明カラム1'
-    expect(page).to have_content Time.current
+    expect(page).to have_content DateTime.current.strftime("%Y-%m-%d")
+    expect(page).to have_content '完了'
     expect(page).to have_content 'タスク名カラム2'
     expect(page).to have_content '説明カラム2'
-    expect(page).to have_content Time.current + 3.days
+    expect(page).to have_content (DateTime.current + 3.days).strftime("%Y-%m-%d")
+    expect(page).to have_content '着手中'
     expect(page).to have_content 'タスク名カラム3'
     expect(page).to have_content '説明カラム3'
-    expect(page).to have_content Time.current + 4.days
+    expect(page).to have_content (DateTime.current + 4.days).strftime("%Y-%m-%d")
+    expect(page).to have_content '未着手'
   end
 
   scenario "タスク作成のテスト" do
@@ -26,13 +29,17 @@ RSpec.feature "タスク管理機能", type: :feature do
 
     fill_in 'task_name', with: 'タスク名カラム：作成テスト'
     fill_in 'task_description', with: '説明カラム：作成テスト'
-    fill_in 'task_deadline', with: Time.current
+    select DateTime.current.year, from: 'task_deadline_1i'
+    select DateTime.current.month, from: 'task_deadline_2i'
+    select DateTime.current.day, from: 'task_deadline_3i'
+    select '未着手', from: 'ステータス'
 
     click_on '登録する'
 
     expect(page).to have_content 'タスク名カラム：作成テスト'
     expect(page).to have_content '説明カラム：作成テスト'
-    expect(page).to have_content Time.current
+    expect(page).to have_content DateTime.current.strftime("%Y-%m-%d")
+    expect(page).to have_content '未着手'
   end
 
   scenario "タスク詳細のテスト" do
@@ -41,7 +48,7 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit task_path(3)
   end
 
-  scenario "タスクが作成日時でソートできるかのテスト" do
+  scenario "タスクが作成日時順（降順）に並んでいるかのテスト" do
     visit tasks_path
 
     task = all('.task_name')
@@ -52,15 +59,40 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(task_last).to have_content "タスク名カラム1"
   end
 
-  scenario "タスクが終了期限でソートできるかのテスト" do
-    visit tasks_path(sort_expired: "deadline")
+  scenario "タスク検索のテスト" do
+    # ステータス検索
+    visit tasks_path
 
-    task = all('.task_name')
-    task_first = task.first
-    task_last = task.last
+    select '未着手'
 
-    expect(task_first).to have_content "タスク名カラム1"
-    expect(task_last).to have_content "タスク名カラム3"
+    click_on '検索'
+
+    expect(page).not_to have_content "タスク名カラム1"
+    expect(page).not_to have_content "タスク名カラム2"
+    expect(page).to have_content "タスク名カラム3"
+
+    # タスク名検索
+    visit tasks_path
+
+    fill_in with: 'カラム2'
+
+    click_on '検索'
+
+    expect(page).not_to have_content "タスク名カラム1"
+    expect(page).to have_content "タスク名カラム2"
+    expect(page).not_to have_content "タスク名カラム3"
+
+    # ステータス+タスク名検索
+    visit tasks_path
+
+    select '未着手'
+    fill_in with: 'カラム2'
+
+    click_on '検索'
+
+    expect(page).not_to have_content "タスク名カラム1"
+    expect(page).not_to have_content "タスク名カラム2"
+    expect(page).not_to have_content "タスク名カラム3"
   end
 
 end
