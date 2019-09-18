@@ -6,6 +6,7 @@ FactoryBot.define do
     updated_at { Time.current }
     deadline { Time.current }
     status { 'done' }
+    priority { 'low' }
   end
 
   factory :task_test2, class: Task do
@@ -15,6 +16,7 @@ FactoryBot.define do
     updated_at { Time.current + 2.days }
     deadline { Time.current + 3.days }
     status { 'in_progress' }
+    priority { 'high' }
   end
 
   factory :task_test3, class: Task do
@@ -24,5 +26,6 @@ FactoryBot.define do
     updated_at { Time.current + 3.days }
     deadline { Time.current + 4.days }
     status { 'untouched' }
+    priority { 'middle' }
   end
 end
