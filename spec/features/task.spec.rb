@@ -12,15 +12,15 @@ RSpec.feature "タスク管理機能", type: :feature do
 
     expect(page).to have_content 'タスク名カラム1'
     expect(page).to have_content '説明カラム1'
-    expect(page).to have_content Time.current
+    expect(page).to have_content DateTime.current.strftime("%Y-%m-%d")
     expect(page).to have_content '完了'
     expect(page).to have_content 'タスク名カラム2'
     expect(page).to have_content '説明カラム2'
-    expect(page).to have_content Time.current + 3.days
+    expect(page).to have_content (DateTime.current + 3.days).strftime("%Y-%m-%d")
     expect(page).to have_content '着手中'
     expect(page).to have_content 'タスク名カラム3'
     expect(page).to have_content '説明カラム3'
-    expect(page).to have_content Time.current + 4.days
+    expect(page).to have_content (DateTime.current + 4.days).strftime("%Y-%m-%d")
     expect(page).to have_content '未着手'
   end
 
@@ -29,14 +29,16 @@ RSpec.feature "タスク管理機能", type: :feature do
 
     fill_in 'task_name', with: 'タスク名カラム：作成テスト'
     fill_in 'task_description', with: '説明カラム：作成テスト'
-    fill_in 'task_deadline', with: Time.current + 3.days
+    select DateTime.current.year, from: 'task_deadline_1i'
+    select DateTime.current.month, from: 'task_deadline_2i'
+    select DateTime.current.day, from: 'task_deadline_3i'
     select '未着手', from: 'ステータス'
 
     click_on '登録する'
 
     expect(page).to have_content 'タスク名カラム：作成テスト'
     expect(page).to have_content '説明カラム：作成テスト'
-    expect(page).to have_content Time.current + 3.days
+    expect(page).to have_content DateTime.current.strftime("%Y-%m-%d")
     expect(page).to have_content '未着手'
   end
 
