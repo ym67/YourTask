@@ -27,7 +27,7 @@
 
   <div class="field">
     <%= form.label :status, id: "task_status"  %>
-    <%= form.select :status, Task.statuses.keys.to_a, {} %>
+    <%= form.select :status, Task.statuses.keys.map{|key| [I18n.t("enums.task.status.#{key}"), key]} %>
   </div>
 
   <div class="actions">

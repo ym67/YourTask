@@ -4,26 +4,30 @@
 
 <br>
 
-<%= search_form_for @q do |f| %>
-  <%= f.search_field :name_or_status_cont, placeholder: "タスク名 or ステータス" %>
-  <%= f.submit "検索" %>
+<%= search_form_for @query do |form| %>
+  <%= form.label :task_search, id: "task_search" %>
+  <br>
+  <%= form.select :status_eq, Task.statuses.map{|key, value| [Task.statuses_i18n[key], value]}, include_blank: '指定なし' %>
+  <%= form.search_field :name_cont, placeholder: "タスク名" %>
+  <%= form.submit "検索" %>
 <% end %>
 
 <table>
   <thead>
     <tr>
-      <th><%= sort_link(@q, :status, t('views.tasks.status')) %></th>
-      <th><%= sort_link(@q, :name, t('views.tasks.name')) %></th>
-      <th><%= sort_link(@q, :description, t('views.tasks.description')) %></th>
-      <th><%= sort_link(@q, :description, t('views.tasks.deadline')) %></th>
+      <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
+      <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
+      <th><%= sort_link(@query, :description, t('views.tasks.description')) %></th>
+      <th><%= sort_link(@query, :description, t('views.tasks.deadline')) %></th>
       <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
+
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.status %></td>
+        <td><%= task.status_i18n %></td>
         <td><%= link_to task.name, task, class: 'task_name' %></td>
         <td><%= task.description %></td>
         <td><%= task.deadline %></td>
