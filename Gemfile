@@ -16,6 +16,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'ransack'
 gem 'enum_help'
+gem 'kaminari'
+gem 'kaminari-bootstrap'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
