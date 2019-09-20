@@ -14,3 +14,9 @@ ja:
         notice: ユーザ情報を更新しました。
       destroy:
         notice: 退会しました。
+    sessions_controller:
+      create:
+        success: ログインしました。
+        failure: メールアドレスかパスワードが異なります。
+      destroy:
+        notice: ログアウトしました。
