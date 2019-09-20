@@ -11,18 +11,18 @@ RSpec.feature "タスク管理機能", type: :feature do
     visit tasks_path
 
     expect(page).to have_content 'タスク名カラム1'
-    expect(page).to have_content '説明カラム1'
-    expect(page).to have_content DateTime.current.strftime("%Y-%m-%d")
+    expect(page).not_to have_content '説明カラム1'
+    expect(page).to have_content DateTime.current.strftime("%Y年%m月%d日")
     expect(page).to have_content '完了'
     expect(page).to have_content '低'
     expect(page).to have_content 'タスク名カラム2'
-    expect(page).to have_content '説明カラム2'
-    expect(page).to have_content (DateTime.current + 3.days).strftime("%Y-%m-%d")
+    expect(page).not_to have_content '説明カラム2'
+    expect(page).to have_content (DateTime.current + 3.days).strftime("%Y年%m月%d日")
     expect(page).to have_content '着手中'
     expect(page).to have_content '高'
     expect(page).to have_content 'タスク名カラム3'
-    expect(page).to have_content '説明カラム3'
-    expect(page).to have_content (DateTime.current + 4.days).strftime("%Y-%m-%d")
+    expect(page).not_to have_content '説明カラム3'
+    expect(page).to have_content (DateTime.current + 4.days).strftime("%Y年%m月%d日")
     expect(page).to have_content '未着手'
     expect(page).to have_content '中'
   end
@@ -35,14 +35,14 @@ RSpec.feature "タスク管理機能", type: :feature do
     select DateTime.current.year, from: 'task_deadline_1i'
     select DateTime.current.month, from: 'task_deadline_2i'
     select DateTime.current.day, from: 'task_deadline_3i'
-    select '未着手', from: 'ステータス'
-    select '高', from: '優先順位'
+    select '未着手', from: 'task_status'
+    select '高', from: 'task_priority'
 
     click_on '登録する'
 
     expect(page).to have_content 'タスク名カラム：作成テスト'
     expect(page).to have_content '説明カラム：作成テスト'
-    expect(page).to have_content DateTime.current.strftime("%Y-%m-%d")
+    expect(page).to have_content DateTime.current.strftime("%Y年%m月%d日")
     expect(page).to have_content '未着手'
     expect(page).to have_content '高'
   end
@@ -69,17 +69,6 @@ RSpec.feature "タスク管理機能", type: :feature do
     # ステータス検索
     visit tasks_path
 
-    select '中'
-
-    click_on '検索'
-
-    expect(page).not_to have_content "タスク名カラム1"
-    expect(page).to have_content "タスク名カラム2"
-    expect(page).not_to have_content "タスク名カラム3"
-
-    # ステータス検索
-    visit tasks_path
-
     select '未着手'
 
     click_on '検索'
@@ -99,10 +88,9 @@ RSpec.feature "タスク管理機能", type: :feature do
     expect(page).to have_content "タスク名カラム2"
     expect(page).not_to have_content "タスク名カラム3"
 
-    # 優先順位+ステータス+タスク名検索
+    # ステータス+タスク名検索
     visit tasks_path
 
-    select '中'
     select '未着手'
     fill_in with: 'カラム3'
 
