@@ -2,7 +2,7 @@
   <% if task.errors.any? %>
     <div id="error_explanation" class="row" >
       <div class="col-12 text-left alert alert-danger rounded-0" role="alert">
-        <strong class="alert-heading">⚠︎<%= pluralize(task.errors.count, "件") %> のエラーが発生しました</strong>
+        <strong class="alert-heading">⚠︎ <%= pluralize(task.errors.count, "件") %> のエラーが発生しました</strong>
         <ul class="mb-0">
           <% task.errors.full_messages.each do |message| %>
             <li><%= message %></li>
