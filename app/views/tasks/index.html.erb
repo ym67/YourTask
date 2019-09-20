@@ -1,44 +1,68 @@
-<h1><%= t('views.tasks.index_html.title') %></h1>
-
-<p id="notice"><%= notice %></p>
-
-<br>
-
-<%= search_form_for @query do |form| %>
-  <%= form.select :status_eq, Task.statuses.map{|key, value| [Task.statuses_i18n[key], value]}, include_blank: 'ステータス' %>
-  <%= form.search_field :name_cont, placeholder: "タスク名" %>
-  <%= form.submit "検索" %>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th><%= sort_link(@query, :priority, t('views.tasks.priority')) %></th>
-      <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
-      <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
-      <th><%= sort_link(@query, :description, t('views.tasks.description')) %></th>
-      <th><%= sort_link(@query, :description, t('views.tasks.deadline')) %></th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.priority_i18n %></td>
-        <td><%= task.status_i18n %></td>
-        <td><%= link_to task.name, task, class: 'task_name' %></td>
-        <td><%= task.description %></td>
-        <td><%= task.deadline.strftime("%Y-%m-%d") %></td>
-        <td><%= link_to t('views.tasks.edit'), edit_task_path(task) %></td>
-        <td><%= link_to t('views.tasks.destroy'), task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%= paginate @tasks %>
-
-<br>
-
-<%= link_to t('views.tasks.create'), new_task_path %>
+<div class="row">
+  <div class="col-8 offset-2">
+    <div class="card border-primary rounded-0">
+      <div class="card-header bg-transparent border-primary text-center">
+        <div class="row d-flex align-items-center">
+          <div class="col-7 text-right">
+            <strong class="text-primary"><%= link_to t('views.tasks.index_html.title'), tasks_path %></strong>
+          </div>
+          <div class="col-5 text-right">
+            <strong class="text-primary"><%= link_to t('views.tasks.create'), new_task_path, class: 'btn btn-outline-primary btn-sm rounded-0' %></strong>
+          </div>
+        </div>
+      </div>
+      <div class="card-header bg-transparent border-primary">
+        <div class="row d-flex align-items-center">
+          <div class="col-12 text-center">
+            <%= search_form_for @query do |form,class: "form-inline"| %>
+              <%= form.select :status_eq, Task.statuses.map{|key, value| [Task.statuses_i18n[key], value]}, include_blank: 'ステータス' %>
+              <%= form.search_field :name_cont, placeholder: "タスク名" %>
+              <%= form.submit "検索", class: 'search_btn' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row d-flex align-items-center">
+          <div class="col-10 offset-1">
+            <table width="100%">
+              <thead>
+                <tr class="text-center border-bottom border-primary">
+                  <th><%= sort_link(@query, :priority, t('views.tasks.priority')) %></th>
+                  <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
+                  <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
+                  <th><%= sort_link(@query, :deadline, t('views.tasks.deadline')) %></th>
+                  <th colspan="1"></th>
+                </tr>
+                <tr class="border-bottom border-primary">
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @tasks.each do |task| %>
+                  <tr class="text-center border-bottom border-primary">
+                    <td><%= task.priority_i18n %></td>
+                    <td><%= task.status_i18n %></td>
+                    <td><%= link_to task.name, task, class: 'task_name' %></td>
+                    <td><%= task.deadline.strftime("%Y年%m月%d日") %></td>
+                    <td><%= link_to '×', task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 offset-2">
+            <%= paginate @tasks %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

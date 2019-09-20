@@ -12,6 +12,8 @@ ja:
       deadline: 終了期限
       status: ステータス
       priority: 優先順位
+      created_at: 作成日
+      updated_at: 更新日
       create: 新規作成
       show: 詳細
       edit: 編集

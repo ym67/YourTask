@@ -1,42 +1,66 @@
 <%= form_with(model: @task, local: true) do |form| %>
   <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "件") %> のエラーが発生しました</h2>
-      <ul>
-        <% task.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <div id="error_explanation" class="row" >
+      <div class="col-12 text-left alert alert-danger rounded-0" role="alert">
+        <strong class="alert-heading">⚠︎<%= pluralize(task.errors.count, "件") %> のエラーが発生しました</strong>
+        <ul class="mb-0">
+          <% task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     </div>
+    <br>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name, id: "task_name" %>
-    <%= form.text_field :name %>
+  <div class="row d-flex align-items-center form-group">
+    <div class="col-3 text-left">
+      <strong class="text-primary"><%= t('views.tasks.name') %></strong>
+    </div>
+    <div class="col-9 text-left">
+      <%= form.text_field :name, placeholder: "タスク名を入力してください", class: "form-control rounded-0" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :description, id: "task_description"  %>
-    <%= form.text_field :description %>
+  <hr color="#007BFF">
+  <div class="row d-flex align-items-center form-group">
+    <div class="col-3 text-left">
+      <strong class="text-primary"><%= t('views.tasks.description') %></strong>
+    </div>
+    <div class="col-9 text-left">
+      <%= form.text_area :description, placeholder: "タスクの説明を入力してください", class: "form-control rounded-0" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :deadline, id: "task_deadline"  %>
-    <%= form.date_select :deadline %>
+  <hr color="#007BFF">
+  <div class="row d-flex align-items-center form-group">
+    <div class="col-3 text-left">
+      <strong class="text-primary"><%= t('views.tasks.deadline') %></strong>
+    </div>
+    <div class="col-9 text-left">
+      <%= form.date_select :deadline, class: "form-control rounded-0" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :status, id: "task_status"  %>
-    <%= form.select :status, Task.statuses.keys.map{|key| [I18n.t("enums.task.status.#{key}"), key]} %>
+  <hr color="#007BFF">
+  <div class="row d-flex align-items-center form-group">
+    <div class="col-3 text-left">
+      <strong class="text-primary"><%= t('views.tasks.status') %></strong>
+    </div>
+    <div class="col-9 text-left">
+      <%= form.select :status, Task.statuses.keys.map{|key| [I18n.t("enums.task.status.#{key}"), key]}, class: "form-control rounded-0" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= form.label :priority, id: "task_priority"  %>
-    <%= form.select :priority, Task.priorities.keys.map{|key| [I18n.t("enums.task.priority.#{key}"), key]} %>
+  <hr color="#007BFF">
+  <div class="row d-flex align-items-center form-group">
+    <div class="col-3 text-left">
+      <strong class="text-primary"><%= t('views.tasks.priority') %></strong>
+    </div>
+    <div class="col-9 text-left">
+      <%= form.select :priority, Task.priorities.keys.map{|key| [I18n.t("enums.task.priority.#{key}"), key]}, class: "form-control rounded-0" %>
+    </div>
   </div>
+  <hr color="#007BFF">
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions text-center">
+    <%= form.submit class: "btn btn-outline-primary rounded-0" %>
   </div>
 
 <% end %>

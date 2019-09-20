@@ -1,0 +1,197 @@
+// 全体的
+body {
+  background-color: #FFFFFF;
+}
+
+body, #wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#contents {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+#notice {
+  text-align: center;
+}
+
+#flash_msg {
+  text-align: center;
+}
+
+// ヘッダー
+.navbar .navbar-brand {
+  font-size: 30px;
+}
+
+.navbar .navbar-brand:hover {
+  opacity: 0.5;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  font-size: 15px;
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+  opacity: 0.5;
+}
+
+.navbar-toggler {
+  outline: solid 0 ;
+}
+
+// ハンバーガーメニュー
+.navbar-light .navbar-toggler {
+  color: rgba(0, 0, 0, 0.5);
+  border: none;
+  padding: 0px;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  position: relative;
+}
+.navbar-light .navbar-toggler-icon {
+  background-image:none;
+  background-color: #fff;
+  width: 30px;
+  height: 2px;
+  display: block;
+  position: absolute;
+  transition: ease .5s;
+}
+
+.navbar-toggler-icon:nth-of-type(1) {top:7px;}
+.navbar-toggler-icon:nth-of-type(2) {top:14px;}
+.navbar-toggler-icon:nth-of-type(3) {top:21px;}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:nth-of-type(1) {
+top:13px;
+transform: rotate(45deg);
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:nth-of-type(2) {
+opacity: 0;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon:nth-of-type(3) {
+top:13px;
+transform: rotate(-45deg);
+}
+
+// 入力フォーム枠
+#task_name, #task_description, #task_deadline_1i, #task_deadline_2i, #task_deadline_3i, #task_status, #task_priority, #q_status_eq, [type="search"] {
+  color: #000000;
+  background-color: #FFFFFF;
+  background-clip: padding-box;
+  border: 0;
+  outline: 1px solid #007BFF;
+  outline-offset: -1px;
+}
+
+// 終了期限セレクト枠
+#task_deadline_1i, #task_deadline_2i, #task_deadline_3i {
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+// 年
+#task_deadline_1i {
+  width: 57%;
+}
+// 月
+#task_deadline_2i {
+  width: 20%;
+}
+// 日
+#task_deadline_3i {
+  width: 20%;
+}
+
+// ステータスセレクト枠、優先順位セレクト枠
+#task_status, #task_priority {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// ステータスセレクト(検索)枠
+#q_status_eq {
+  width: 30%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// テキストフィールド（検索）枠
+[type="search"] {
+  width: 55%;
+  height: calc(1.5em + 0.75rem + 3.5px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// 送信ボタン(検索)枠
+.search_btn {
+  color: #007BFF;
+  background-color: #FFFFFF;
+  background-clip: padding-box;
+  border: 0;
+  outline: 1px solid #007BFF;
+  outline-offset: -1px;
+  height: calc(1.5em + 0.75rem + 2.5px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.search_btn:hover{
+  color: #FFFFFF;
+  background-color: #007BFF;
+  transition: background-color 0.35s;
+}
+
+// ページネーション部分
+.pagination>li>a {
+  border: solid 1px #007BFF;
+  color: #007BFF;
+}
+
+// ページ番号部分
+.pagination>.active>a {
+  background: #007BFF;
+}
+.pagination>li>a:hover {
+  color: #FFFFFF;
+  background: #007BFF;
+  border: solid 1px #007BFF;
+}
+// ulの中央寄せ
+.flex {
+	display: flex;
+	justify-content: center;
+}
+
+// フッター
+footer {
+  color: #007BFF;
+  opacity: 0.5;
+  margin-top: auto;
+  text-align: center;
+  padding: 15px;
+}
