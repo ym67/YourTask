@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:show, :edit, :update, :destroy]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -18,7 +20,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to @user, notice: t('controllers.users_controller.create.notice')
+      session[:user_id] = @user.id
+      redirect_to user_path(@user.id), notice:  t('controllers.users_controller.create.notice')
     else
       render :new
     end
@@ -45,6 +48,13 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def ensure_correct_user
+    if current_user.id != params[:id].to_i
+      flash[:notice] = "権限がありません。"
+      redirect_to tasks_path
+    end
   end
 
 end

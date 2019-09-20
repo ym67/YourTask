@@ -1,9 +1,12 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user
+  before_action :check_task_authority, only: [:show, :edit, :update, :destroy]
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
     @query = Task.ransack(params[:q])
     @tasks = @query.result(distinct: true).sorted.page(params[:page])
+    @mytasks = @tasks.where(user_id: current_user.id)
   end
 
   def show
@@ -17,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to @task, notice: t('controllers.tasks_controller.create.notice')
     else
@@ -47,5 +50,14 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:name, :description, :deadline, :status, :priority, :q)
   end
+
+  def check_task_authority
+    if Task.find(params[:id].to_i).user_id.to_i == current_user.id
+    else
+      redirect_to tasks_path, notice: '権限がありません'
+    end
+  end
+
+
 
 end
