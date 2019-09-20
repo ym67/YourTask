@@ -1,17 +1,99 @@
-<h1><%= t('views.tasks.show_html.title') %></h1>
+<div class="row">
+  <div class="col-6 offset-3">
 
-<p id="notice"><%= notice %></p>
+    <div class="card border-primary rounded-0">
+      <div class="card-header bg-transparent border-primary">
+        <div class="row d-flex align-items-center">
+          <div class="col-7 text-right">
+            <strong class="text-primary"><%= t('views.tasks.show_html.title') %></strong>
+          </div>
+          <div class="col-5 text-right">
+            <strong class="text-primary"><%= link_to t('views.tasks.edit'), edit_task_path(@task), class: 'btn btn-outline-primary btn-sm rounded-0' %></strong>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.tasks.name') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @task.name %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.tasks.description') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @task.description %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.tasks.deadline') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @task.deadline.strftime("%Y年%m月%d日") %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.tasks.status') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @task.status_i18n %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.tasks.priority') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @task.priority_i18n %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.tasks.created_at') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @task.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
+          </div>
+        </div>
+        <% unless @task.created_at == @task.updated_at %>
+          <hr color="#007BFF">
+          <div class="row">
+            <div class="col-3 text-left">
+              <strong class="text-primary"><%= t('views.tasks.updated_at') %></strong>
+            </div>
+            <div class="col-0.5 text-center">：</div>
+            <div class="col-8.5 text-left">
+              <%= @task.updated_at.strftime("%Y年%m月%d日 %H時%M分") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-<br>
+    <br>
 
-<p><%= t('views.tasks.priority') %>：<strong><%= @task.priority_i18n %></strong></p>
-<p><%= t('views.tasks.status') %>：<strong><%= @task.status_i18n %></strong></p>
-<p><%= t('views.tasks.name') %>：<strong><%= @task.name %></strong></p>
-<p><%= t('views.tasks.description') %>：<strong><%= @task.description %></strong></p>
-<p><%= t('views.tasks.deadline') %>：<strong><%= @task.deadline.strftime("%Y-%m-%d") %></strong></p>
+    <div class="row">
+      <div class="col-6 offset-3 text-center">
+        <%= link_to t('views.tasks.back'), tasks_path, class: "btn btn-outline-primary rounded-0" %>
+      </div>
+    </div>
 
-
-<br>
-
-<%= link_to t('views.tasks.edit'), edit_task_path(@task) %> |
-<%= link_to t('views.tasks.back'), tasks_path %>
+  </div>
+</div>
