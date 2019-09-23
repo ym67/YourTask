@@ -18,7 +18,11 @@
 
       <header id="header">
         <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #007BFF;">
-          <%= link_to "Task", tasks_path, class: "navbar-brand", style: "color: #FFFFFF;" %>
+          <% if logged_in? %>
+            <%= link_to "Task", tasks_path, class: "navbar-brand", style: "color: #FFFFFF;" %>
+          <% else %>
+            <%= link_to "Task", new_session_path, class: "navbar-brand", style: "color: #FFFFFF;" %>
+          <% end %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gnavi" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             <span class="navbar-toggler-icon"></span>
@@ -26,9 +30,14 @@
           </button>
           <div class="collapse navbar-collapse" id="gnavi">
             <ul class="navbar-nav ml-auto float-right">
+              <% if logged_in? %>
                 <li class="nav-item">
-                  <%= link_to "タスクを追加する", new_task_path, class: "nav-link", style: "color: #FFFFFF;" %>
+                  <%= link_to "#{@current_user.name}", user_path(@current_user.id), class:"nav-link", style: "color: #FFFFFF;" %>
                 </li>
+                <li class="nav-item">
+                  <%= link_to "ログアウト", session_path(@current_user.id), method: :delete, class:"nav-link", style: "color: #FFFFFF;" %>
+                </li>
+              <% end %>
             </ul>
           </div>
         </nav>

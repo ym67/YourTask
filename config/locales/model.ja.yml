@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       task: タスク
+      user: ユーザ
     attributes:
       task:
         name: タスク名
@@ -10,3 +11,8 @@ ja:
         status: ステータス
         priority: 優先順位
         task_search: タスク検索
+      user:
+        name: ユーザ名
+        email: メールアドレス
+        password: パスワード
+        password_digest: パスワード

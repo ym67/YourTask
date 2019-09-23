@@ -1,31 +1,34 @@
 FactoryBot.define do
-  factory :task_test1, class: Task do
-    name { 'タスク名カラム1' }
-    description { '説明カラム1' }
+  factory :test_task1, class: Task do
+    name { 'テスト（タスク名）1' }
+    description { 'テスト（説明）1' }
     created_at { DateTime.current }
     updated_at { DateTime.current }
     deadline { DateTime.current }
     status { 'done' }
     priority { 'low' }
+    user_id { 1 }
   end
 
-  factory :task_test2, class: Task do
-    name { 'タスク名カラム2' }
-    description { '説明カラム2' }
+  factory :test_task2, class: Task do
+    name { 'テスト（タスク名）2' }
+    description { 'テスト（説明）2' }
     created_at { DateTime.current + 1.days }
     updated_at { DateTime.current + 2.days }
     deadline { DateTime.current + 3.days }
     status { 'in_progress' }
     priority { 'high' }
+    user_id { 1 }
   end
 
-  factory :task_test3, class: Task do
-    name { 'タスク名カラム3' }
-    description { '説明カラム3' }
+  factory :test_task3, class: Task do
+    name { 'テスト（タスク名）3' }
+    description { 'テスト（説明）3' }
     created_at { DateTime.current + 2.days }
     updated_at { DateTime.current + 3.days }
     deadline { DateTime.current + 4.days }
     status { 'untouched' }
     priority { 'middle' }
+    user_id { 2 }
   end
 end
