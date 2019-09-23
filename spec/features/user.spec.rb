@@ -43,4 +43,29 @@ RSpec.feature "ユーザ管理機能", type: :feature do
     expect(page).to have_content 'テストユーザ2'
     expect(page).to have_content 'test2@example.com'
   end
+
+  scenario "未ログインの場合、ログイン画面か新規登録画面のみアクセス可能になっているかのテスト" do
+    visit tasks_path
+    expect(page).to have_content 'ログインが必要です'
+    visit task_path(1)
+    expect(page).to have_content 'ログインが必要です'
+    visit user_path(1)
+    expect(page).to have_content 'ログインが必要です'
+  end
+
+  scenario "ログイン済みの場合、ログイン画面か新規登録画面にはアクセス不可になっているかのテスト" do
+    visit new_user_path
+    fill_in 'user_name', with: 'テストユーザ1'
+    fill_in 'user_email', with: 'test1@example.com'
+    fill_in 'user_password', with: 'test111'
+    fill_in 'user_password_confirmation', with: 'test111'
+    click_on '登録する'
+
+    visit new_user_path
+    expect(page).to have_content 'すでにログインしています。'
+    visit new_session_path
+    expect(page).to have_content 'すでにログインしています。'
+  end
+
+
 end
