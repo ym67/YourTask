@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-6 offset-3">
+
+    <div class="card border-primary rounded-0">
+      <div class="card-header bg-transparent border-primary text-center">
+        <strong class="text-primary"><%= t('views.users.new_html.title') %></strong>
+      </div>
+      <div class="card-body">
+        <%= render 'form', user: @user %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-6 offset-3 text-center">
+        <%= link_to 'ログイン', new_session_path, class: "btn btn-outline-primary rounded-0" %>
+      </div>
+    </div>
+
+  </div>
+</div>

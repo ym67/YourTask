@@ -29,6 +29,7 @@ body, #wrapper {
 
 .navbar .navbar-brand:hover {
   opacity: 0.5;
+  transition: 0.3s;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -37,6 +38,7 @@ body, #wrapper {
 
 .navbar-light .navbar-nav .nav-link:hover{
   opacity: 0.5;
+  transition: 0.3s;
 }
 
 .navbar-toggler {

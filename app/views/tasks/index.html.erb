@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-8 offset-2">
+
     <div class="card border-primary rounded-0">
       <div class="card-header bg-transparent border-primary text-center">
         <div class="row d-flex align-items-center">
@@ -25,44 +26,53 @@
       <div class="card-body">
         <div class="row d-flex align-items-center">
           <div class="col-10 offset-1">
-            <table width="100%">
-              <thead>
-                <tr class="text-center border-bottom border-primary">
-                  <th><%= sort_link(@query, :priority, t('views.tasks.priority')) %></th>
-                  <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
-                  <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
-                  <th><%= sort_link(@query, :deadline, t('views.tasks.deadline')) %></th>
-                  <th colspan="1"></th>
-                </tr>
-                <tr class="border-bottom border-primary">
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @tasks.each do |task| %>
+            <% if @mytasks != [] %>
+              <table width="100%">
+                <thead>
                   <tr class="text-center border-bottom border-primary">
-                    <td><%= task.priority_i18n %></td>
-                    <td><%= task.status_i18n %></td>
-                    <td><%= link_to task.name, task, class: 'task_name' %></td>
-                    <td><%= task.deadline.strftime("%Y年%m月%d日") %></td>
-                    <td><%= link_to '×', task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
+                    <th><%= sort_link(@query, :priority, t('views.tasks.priority')) %></th>
+                    <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
+                    <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
+                    <th><%= sort_link(@query, :deadline, t('views.tasks.deadline')) %></th>
+                    <th colspan="1"></th>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <br>
+                  <tr class="border-bottom border-primary">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @mytasks.each do |task| %>
+                    <tr class="text-center border-bottom border-primary">
+                      <td><%= task.priority_i18n %></td>
+                      <td><%= task.status_i18n %></td>
+                      <td><%= link_to task.name, task, class: 'task_name' %></td>
+                      <td><%= task.deadline.strftime("%Y年%m月%d日") %></td>
+                      <td><%= link_to '×', task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <br>
+            <% else %>
+              <div class="row d-flex align-items-center">
+                <div class="col-10 offset-1 text-center">
+                  <strong>タスクがありません ⇨ <%= link_to t('views.tasks.create'), new_task_path %></strong>
+                </div>
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="row">
           <div class="col-8 offset-2">
-            <%= paginate @tasks %>
+            <%= paginate @mytasks %>
           </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
