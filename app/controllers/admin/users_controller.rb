@@ -27,7 +27,7 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_user_path(@user), notice:  "#{@user.name}さんのアカウントを作成しました。"
+      redirect_to admin_user_path(@user), notice: "#{@user.name}さんのアカウントを作成しました。"
     else
       render :new
     end
@@ -42,15 +42,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    if @user == User.first && @user == User.last
-      redirect_to admin_users_path, notice: "ユーザがゼロになってしまう為、削除できません。"
+    @user.destroy
+    if User.where(admin: true).length <= 1 && @user.admin == true
+      redirect_to admin_users_path, notice: "管理者をゼロには出来ません。"
     else
-      if @user.admin == true
-        redirect_to admin_users_path, notice: "管理者権限を持つユーザは削除できません。"
-      else
-        @user.destroy
-        redirect_to admin_users_path, notice: "ユーザを削除しました。"
-      end
+      redirect_to admin_users_path, notice: "ユーザを削除しました。"
     end
   end
 
