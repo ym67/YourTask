@@ -82,7 +82,9 @@ transform: rotate(-45deg);
 }
 
 // 入力フォーム枠
-#task_name, #task_description, #task_deadline_1i, #task_deadline_2i, #task_deadline_3i, #task_status, #task_priority, #q_status_eq, [type="search"] {
+#task_name, #task_description, #task_deadline_1i, #task_deadline_2i, #task_deadline_3i, #task_status, #task_priority,
+#user_name, ,#user_email, #user_password, #user_password_confirmation, #user_admin,
+#q_status_eq, [type="search_task_name"], [type="search_user_name"], [type="search_user_email"] {
   color: #000000;
   background-color: #FFFFFF;
   background-clip: padding-box;
@@ -114,7 +116,7 @@ transform: rotate(-45deg);
 }
 
 // ステータスセレクト枠、優先順位セレクト枠
-#task_status, #task_priority {
+#task_status, #task_priority, #user_admin {
     display: block;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
@@ -128,6 +130,17 @@ transform: rotate(-45deg);
 // ステータスセレクト(検索)枠
 #q_status_eq {
   width: 30%;
+  height: calc(1.5em + 0.75rem + 2.5px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// タスク名検索フォーム
+[type="search_task_name"] {
+  width: 55%;
   height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -136,10 +149,21 @@ transform: rotate(-45deg);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-// テキストフィールド（検索）枠
-[type="search"] {
-  width: 55%;
-  height: calc(1.5em + 0.75rem + 3.5px);
+// ユーザ名検索フォーム
+[type="search_user_name"] {
+  width: 25%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// メールアドレス検索フォーム
+[type="search_user_email"] {
+  width: 40%;
+  height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -155,7 +179,7 @@ transform: rotate(-45deg);
   border: 0;
   outline: 1px solid #007BFF;
   outline-offset: -1px;
-  height: calc(1.5em + 0.75rem + 2.5px);
+  height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;

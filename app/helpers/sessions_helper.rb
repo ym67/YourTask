@@ -15,7 +15,7 @@ module SessionsHelper
   end
 
   def forbid_login_user
-    if current_user !=nil
+    if current_user !=nil && current_user.admin != true
       flash[:notice] = "すでにログインしています。"
       redirect_to tasks_path
     end

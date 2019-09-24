@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_path(@user.id), notice:  t('controllers.users_controller.create.notice')
+      redirect_to user_path(@user.id), notice: t('controllers.users_controller.create.notice')
     else
       render :new
     end
@@ -52,9 +52,11 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    if current_user.id != params[:id].to_i
-      flash[:notice] = "権限がありません。"
-      redirect_to tasks_path
+    if current_user.admin != true
+      if current_user.id != params[:id].to_i
+        flash[:notice] = "権限がありません。"
+        redirect_to tasks_path
+      end
     end
   end
 

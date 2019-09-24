@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-8 offset-2">
+
+    <div class="card border-primary rounded-0">
+      <div class="card-header bg-transparent border-primary text-center">
+        <div class="row d-flex align-items-center">
+          <div class="col-7 text-right">
+            <strong class="text-primary"><%= link_to t('views.users.index_html.title'), admin_users_path %></strong>
+          </div>
+          <div class="col-5 text-right">
+            <strong class="text-primary"><%= link_to t('views.users.create'), new_admin_user_path, class: 'btn btn-outline-primary btn-sm rounded-0' %></strong>
+          </div>
+        </div>
+      </div>
+      <div class="card-header bg-transparent border-primary">
+        <div class="row d-flex align-items-center">
+          <div class="col-12 text-center">
+            <%= search_form_for [:admin, @query] do |form| %>
+              <%= form.search_field :name_cont, placeholder: "ユーザ名", type: 'search_user_name' %>
+              <%= form.search_field :email_cont, placeholder: "メールアドレス", type: 'search_user_email' %>
+              <%= form.submit "検索", class: 'search_btn' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row d-flex align-items-center">
+          <div class="col-10 offset-1">
+            <table width="100%">
+              <thead>
+                <tr class="text-center border-bottom border-primary">
+                  <th><%= sort_link(@query, :admin, "権限") %></th>
+                  <th><%= sort_link(@query, :name, t('views.users.name')) %></th>
+                  <th><%= sort_link(@query, :email, t('views.users.email')) %></th>
+                  <th><%= sort_link(@query, :created_at, t('views.users.created_at')) %></th>
+                  <th><font color="#007BFF">タスク数</font></th>
+                  <th colspan="1"></th>
+                </tr>
+                <tr class="border-bottom border-primary">
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @users.each do |user| %>
+                  <tr class="text-center border-bottom border-primary">
+                    <% if user.admin == true %>
+                      <td>管理者</td>
+                    <% else %>
+                      <td> 一般 </td>
+                    <% end %>
+                    <td><%= link_to user.name, admin_user_url(user), class: 'user_name' %></td>
+                    <td><%= user.email %></td>
+                    <td><%= user.created_at.strftime("%Y年%m月%d日") %></td>
+                    <td><%= link_to Task.where(user_id: user.id).length, admin_user_url(user), class: 'task_name' %></td>
+                    <% if user.admin == true %>
+                      <td colspan="1"></td>
+                    <% else %>
+                      <td><%= link_to '×', admin_user_path(user.id), method: :delete, data: { confirm: "このユーザを削除します。よろしいですか？" } %></td>
+                    <% end %>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 offset-2">
+            <%= paginate @users %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-6 offset-3 text-center">
+        <%= link_to '戻る', tasks_path, class: "btn btn-outline-primary rounded-0" %>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -15,9 +15,9 @@
       <div class="card-header bg-transparent border-primary">
         <div class="row d-flex align-items-center">
           <div class="col-12 text-center">
-            <%= search_form_for @query do |form,class: "form-inline"| %>
+            <%= search_form_for @query do |form| %>
               <%= form.select :status_eq, Task.statuses.map{|key, value| [Task.statuses_i18n[key], value]}, include_blank: 'ステータス' %>
-              <%= form.search_field :name_cont, placeholder: "タスク名" %>
+              <%= form.search_field :name_cont, placeholder: "タスク名", type: 'search_task_name'  %>
               <%= form.submit "検索", class: 'search_btn' %>
             <% end %>
           </div>
