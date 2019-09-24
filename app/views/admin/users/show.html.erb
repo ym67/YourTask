@@ -1,0 +1,141 @@
+<div class="row">
+  <div class="col-8 offset-2">
+
+    <div class="card border-primary rounded-0">
+      <div class="card-header bg-transparent border-primary">
+        <div class="row d-flex align-items-center">
+          <div class="col-7 text-right">
+            <strong class="text-primary"><%= @user.name %>さんの<%= t('views.users.show_html.title') %></strong>
+          </div>
+          <div class="col-5 text-right">
+            <strong class="text-primary"><%= link_to t('views.users.edit'), edit_admin_user_path(@user), class: 'btn btn-outline-primary btn-sm rounded-0' %></strong>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary">権限</strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <% if @user.admin == true %>
+              管理者
+            <% else %>
+              一般
+            <% end %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.users.name') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @user.name %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.users.email') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @user.email %>
+          </div>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
+            <strong class="text-primary"><%= t('views.users.created_at') %></strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <div class="col-8.5 text-left">
+            <%= @user.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
+          </div>
+        </div>
+        <% unless @user.created_at == @user.updated_at %>
+          <hr color="#007BFF">
+          <div class="row">
+            <div class="col-3 text-left">
+              <strong class="text-primary"><%= t('views.users.updated_at') %></strong>
+            </div>
+            <div class="col-0.5 text-center">：</div>
+            <div class="col-8.5 text-left">
+              <%= @user.updated_at.strftime("%Y年%m月%d日 %H時%M分") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="card border-primary rounded-0">
+      <div class="card-header bg-transparent border-primary text-center">
+        <div class="row d-flex align-items-center">
+          <div class="col-6 offset-3">
+            <strong class="text-primary"><%= @user.name %>さんのタスク一覧</strong>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row d-flex align-items-center">
+          <div class="col-10 offset-1">
+            <% if @tasks != [] %>
+              <table width="100%">
+                <thead>
+                  <tr class="text-center border-bottom border-primary">
+                    <th><%= sort_link(@query, :priority, t('views.tasks.priority')) %></th>
+                    <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
+                    <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
+                    <th><%= sort_link(@query, :deadline, t('views.tasks.deadline')) %></th>
+                  </tr>
+                  <tr class="border-bottom border-primary">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @tasks.each do |task| %>
+                    <tr class="text-center border-bottom border-primary">
+                      <td><%= task.priority_i18n %></td>
+                      <td><%= task.status_i18n %></td>
+                      <td><%= task.name %></td>
+                      <td><%= task.deadline.strftime("%Y年%m月%d日") %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <br>
+            <% else %>
+              <div class="row d-flex align-items-center">
+                <div class="col-10 offset-1 text-center">
+                  <strong>タスクがありません</strong>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 offset-2">
+            <%= paginate @tasks %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="row">
+      <div class="col-6 offset-3 text-center">
+        <%= link_to '戻る', admin_users_path, class: "btn btn-outline-primary rounded-0" %>
+      </div>
+    </div>
+
+  </div>
+</div>
