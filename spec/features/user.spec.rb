@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "ユーザ管理機能", type: :feature do
+RSpec.feature "ユーザに関する機能", type: :feature do
   scenario "ユーザ新規登録・詳細確認のテスト" do
     # ユーザ登録
     visit new_user_path
@@ -67,5 +67,89 @@ RSpec.feature "ユーザ管理機能", type: :feature do
     expect(page).to have_content 'すでにログインしています。'
   end
 
+  scenario "ユーザ管理(admin)：ユーザ一覧のテスト" do
+    FactoryBot.create(:test_user1)
+    FactoryBot.create(:test_user2)
+    FactoryBot.create(:test_user3)
+    FactoryBot.create(:test_user4)
+    visit new_session_path
+    fill_in 'session_email', with: 'test1@example.com'
+    fill_in 'session_password', with: 'test111'
+    click_on 'ログイン'
 
+    click_on 'ユーザ管理'
+    expect(page).to have_content 'テストユーザ1(admin)'
+    expect(page).to have_content 'テストユーザ2'
+    expect(page).to have_content 'テストユーザ3'
+    expect(page).to have_content 'テストユーザ4'
+  end
+
+  scenario "ユーザ管理(admin)：ユーザ作成・詳細のテスト" do
+    FactoryBot.create(:test_user1)
+    visit new_session_path
+    fill_in 'session_email', with: 'test1@example.com'
+    fill_in 'session_password', with: 'test111'
+    click_on 'ログイン'
+
+    click_on 'ユーザ管理'
+    click_on '新規作成'
+    fill_in 'user_name', with: 'テストユーザ'
+    fill_in 'user_email', with: 'test@example.com'
+    fill_in 'user_password', with: 'test000'
+    fill_in 'user_password_confirmation', with: 'test000'
+
+    click_on '登録する'
+
+    expect(page).to have_content 'テストユーザ'
+  end
+
+  scenario "ユーザ管理(admin)：ユーザ更新のテスト" do
+    FactoryBot.create(:test_user1)
+    FactoryBot.create(:test_user2)
+    visit new_session_path
+    fill_in 'session_email', with: 'test1@example.com'
+    fill_in 'session_password', with: 'test111'
+    click_on 'ログイン'
+
+    click_on 'ユーザ管理'
+    click_on 'テストユーザ2'
+    click_on '編集'
+    fill_in 'user_name', with: '新テストユーザ2！'
+    click_on '更新する'
+
+    expect(page).to have_content '新テストユーザ2！'
+  end
+
+  scenario "ユーザ管理(admin)：ユーザ削除のテスト" do
+    FactoryBot.create(:test_user1)
+    FactoryBot.create(:test_user2)
+    visit new_session_path
+    fill_in 'session_email', with: 'test1@example.com'
+    fill_in 'session_password', with: 'test111'
+    click_on 'ログイン'
+
+    click_on 'ユーザ管理'
+    expect(page).to have_content 'テストユーザ2'
+
+    click_on '×'
+    expect(page).not_to have_content 'テストユーザ2'
+  end
+
+  scenario "ユーザ管理(admin)：一般ユーザはadmin関係のページにアクセス不可になっているかのテスト" do
+    FactoryBot.create(:test_user1)
+    FactoryBot.create(:test_user2)
+    visit new_session_path
+    fill_in 'session_email', with: 'test2@example.com'
+    fill_in 'session_password', with: 'test222'
+    click_on 'ログイン'
+
+    visit admin_users_path
+    expect(page).to have_content '権限がありません。'
+    visit new_admin_user_path
+    expect(page).to have_content '権限がありません。'
+    visit admin_user_path(1)
+    expect(page).to have_content '権限がありません。'
+    visit edit_admin_user_path(1)
+    expect(page).to have_content '権限がありません。'
+  end
 end
