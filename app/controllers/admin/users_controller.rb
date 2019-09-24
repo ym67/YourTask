@@ -42,11 +42,15 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    if User.where(admin: true).length <= 1 && @user.admin == true
-      redirect_to admin_users_path, notice: "管理者をゼロには出来ません。"
+    if @user.id == current_user.id
+      redirect_to admin_users_path, notice: "ログイン中のため削除できません。"
     else
-      redirect_to admin_users_path, notice: "ユーザを削除しました。"
+      @user.destroy
+      if @user.destroyed? == true
+        redirect_to admin_users_path, notice: "ユーザを削除しました。"
+      else
+        redirect_to admin_users_path, notice: "管理者をゼロには出来ません。"
+      end
     end
   end
 
