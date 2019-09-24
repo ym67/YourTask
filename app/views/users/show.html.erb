@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-6 offset-3">
+  <div class="col-8 offset-2">
 
     <div class="card border-primary rounded-0">
       <div class="card-header bg-transparent border-primary">
@@ -13,6 +13,22 @@
         </div>
       </div>
       <div class="card-body">
+        <% if current_user.admin == true %>
+          <div class="row">
+            <div class="col-3 text-left">
+              <strong class="text-primary">権限</strong>
+            </div>
+            <div class="col-0.5 text-center">：</div>
+            <div class="col-8.5 text-left">
+              <% if @user.admin == true %>
+                管理者
+              <% else %>
+                一般
+              <% end %>
+            </div>
+          </div>
+          <hr color="#007BFF">
+        <% end %>
         <div class="row">
           <div class="col-3 text-left">
             <strong class="text-primary"><%= t('views.users.name') %></strong>

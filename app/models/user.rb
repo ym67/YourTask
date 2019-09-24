@@ -10,7 +10,12 @@ class User < ApplicationRecord
 
   has_secure_password
   validates :password,
-    length: { minimum: 6 }
+    length: { minimum: 6 }, allow_nil: true
 
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
+
+  scope :sorted, -> { order(created_at: :desc) }
+
+  paginates_per 10
+
 end

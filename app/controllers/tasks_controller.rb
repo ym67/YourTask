@@ -52,12 +52,12 @@ class TasksController < ApplicationController
   end
 
   def check_task_authority
-    if Task.find(params[:id].to_i).user_id.to_i == current_user.id
-    else
-      redirect_to tasks_path, notice: '権限がありません'
+    if current_user.admin != true
+      if Task.find(params[:id].to_i).user_id.to_i == current_user.id
+      else
+        redirect_to tasks_path, notice: '権限がありません。'
+      end
     end
   end
-
-
 
 end
