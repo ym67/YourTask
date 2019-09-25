@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_destroy :last_admin_user?
 
   validates :name,
     length: { in: 1..50 }
@@ -18,4 +19,11 @@ class User < ApplicationRecord
 
   paginates_per 10
 
+  private
+
+  def last_admin_user?
+    if User.where(admin: true).length <= 1 && self.admin == true
+      throw :abort
+    end
+  end
 end
