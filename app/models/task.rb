@@ -1,5 +1,4 @@
 class Task < ApplicationRecord
-
   validates :name, length: { in: 1..30 }
 
   enum status: { untouched: 0, in_progress: 1, done: 2, }
@@ -10,4 +9,7 @@ class Task < ApplicationRecord
   paginates_per 10
 
   belongs_to :user
+  has_many :connects, dependent: :destroy
+  has_many :connect_labels, through: :connects, source: :label
+  accepts_nested_attributes_for :connects, allow_destroy: true
 end
