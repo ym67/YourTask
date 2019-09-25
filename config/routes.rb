@@ -1,17 +1,14 @@
 Rails.application.routes.draw do
+  root 'sessions#new'
 
-  root 'users#new'
-
+  resources :sessions
+  resources :users
   namespace :admin do
     resources :users
   end
-
   resources :tasks
-
-  resources :users
-
-  resources :sessions
+  resources :connects
+  resources :labels
 
   # mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-
 end
