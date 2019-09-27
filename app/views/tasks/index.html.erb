@@ -16,6 +16,7 @@
         <div class="row d-flex align-items-center">
           <div class="col-12 text-center">
             <%= search_form_for @query do |form| %>
+              <%= form.select :connects_label_id_eq, [['仕事', 1], ['勉強', 2], ['交際', 3], ['健康', 4], ['その他', 5]], include_blank: 'ラベル' %>
               <%= form.select :status_eq, Task.statuses.map{|key, value| [Task.statuses_i18n[key], value]}, include_blank: 'ステータス' %>
               <%= form.search_field :name_cont, placeholder: "タスク名", type: 'search_task_name'  %>
               <%= form.submit "検索", class: 'search_btn' %>
@@ -34,9 +35,10 @@
                     <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
                     <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
                     <th><%= sort_link(@query, :deadline, t('views.tasks.deadline')) %></th>
-                    <th colspan="1"></th>
+                    <th colspan="2"></th>
                   </tr>
                   <tr class="border-bottom border-primary">
+                    <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -51,6 +53,7 @@
                       <td><%= task.status_i18n %></td>
                       <td><%= link_to task.name, task, class: 'task_name' %></td>
                       <td><%= task.deadline.strftime("%Y年%m月%d日") %></td>
+                      <td><% task.labels.pluck(:label) %></td>
                       <td><%= link_to '×', task, method: :delete, data: { confirm: "このタスクを削除します。よろしいですか？" } %></td>
                     </tr>
                   <% end %>
