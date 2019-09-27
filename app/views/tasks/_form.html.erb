@@ -59,6 +59,18 @@
   </div>
   <hr color="#007BFF">
 
+  <div class="row d-flex align-items-center form-group">
+    <div class="col-3 text-left">
+      <strong class="text-primary">ラベル</strong>
+    </div>
+    <div class="col-9 text-left">
+      <% Label.all.each do |label| %>
+        <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+        <%= label.label %>
+      <% end %>
+    </div>
+  </div>
+
   <div class="actions text-center">
     <%= form.submit class: "btn btn-outline-primary rounded-0" %>
   </div>
