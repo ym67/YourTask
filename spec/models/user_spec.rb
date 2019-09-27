@@ -33,7 +33,7 @@ RSpec.describe User, type: :model do
     expect(user).not_to be_valid
   end
 
-  it "passwordが6文字ちょうどか、それ以上の場合、バリデーションが通らない" do
+  it "passwordが6文字ちょうどか、それ以上の場合、バリデーションが通る" do
     user = User.new(name: 'テストユーザ1', email: 'test1@example.com', password: '123456')
     expect(user).to be_valid
   end
