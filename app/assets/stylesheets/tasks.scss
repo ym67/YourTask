@@ -81,10 +81,11 @@ top:13px;
 transform: rotate(-45deg);
 }
 
-// 入力フォーム枠
+// 入力フォーム全般
+#session_email, #session_password,
 #task_name, #task_description, #task_deadline_1i, #task_deadline_2i, #task_deadline_3i, #task_status, #task_priority,
 #user_name, ,#user_email, #user_password, #user_password_confirmation, #user_admin,
-#q_status_eq, [type="search_task_name"], [type="search_user_name"], [type="search_user_email"] {
+#q_status_eq, #q_connects_label_id_eq, [type="search_task_name"], [type="search_user_name"], [type="search_user_email"] {
   color: #000000;
   background-color: #FFFFFF;
   background-clip: padding-box;
@@ -93,7 +94,7 @@ transform: rotate(-45deg);
   outline-offset: -1px;
 }
 
-// 終了期限セレクト枠
+// 終了期限セレクトボックス
 #task_deadline_1i, #task_deadline_2i, #task_deadline_3i {
   height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
@@ -115,7 +116,7 @@ transform: rotate(-45deg);
   width: 20%;
 }
 
-// ステータスセレクト枠、優先順位セレクト枠
+// ステータスセレクトボックス、優先順位セレクトボックス
 #task_status, #task_priority, #user_admin {
     display: block;
     width: 100%;
@@ -127,9 +128,20 @@ transform: rotate(-45deg);
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-// ステータスセレクト(検索)枠
+// ラベル検索セレクトボックス
+#q_connects_label_id_eq {
+  width: 15%;
+  height: calc(1.5em + 0.75rem + 2.5px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+// ステータス検索セレクトボックス
 #q_status_eq {
-  width: 30%;
+  width: 18%;
   height: calc(1.5em + 0.75rem + 2.5px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -140,7 +152,7 @@ transform: rotate(-45deg);
 
 // タスク名検索フォーム
 [type="search_task_name"] {
-  width: 55%;
+  width: 40%;
   height: calc(1.5em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
@@ -171,7 +183,7 @@ transform: rotate(-45deg);
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-// 送信ボタン(検索)枠
+// 送信ボタン(検索)
 .search_btn {
   color: #007BFF;
   background-color: #FFFFFF;

@@ -65,6 +65,18 @@
         <hr color="#007BFF">
         <div class="row">
           <div class="col-3 text-left">
+            <strong class="text-primary">ラベル</strong>
+          </div>
+          <div class="col-0.5 text-center">：</div>
+          <% @task.labels.pluck(:label).each do |label| %>
+            <div class="text-center">
+              <span class="badge badge-primary mr-1"><%= label %></span>
+            </div>
+          <% end %>
+        </div>
+        <hr color="#007BFF">
+        <div class="row">
+          <div class="col-3 text-left">
             <strong class="text-primary"><%= t('views.tasks.created_at') %></strong>
           </div>
           <div class="col-0.5 text-center">：</div>
