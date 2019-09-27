@@ -17,6 +17,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @labels = @task.labels.pluck(:label)
   end
 
   def create
