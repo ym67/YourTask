@@ -1,5 +1,5 @@
 {
-  "name": "manyou",
+  "name": "your_task",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",

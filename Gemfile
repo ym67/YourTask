@@ -21,7 +21,7 @@ gem 'kaminari-bootstrap'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'select2-rails'
-gem "jquery-turbolinks"
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
