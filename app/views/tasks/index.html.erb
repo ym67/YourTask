@@ -71,7 +71,7 @@
                     <tr class="text-center border-bottom border-primary" height="35">
                       <% if task.status_i18n != "完了" && task.deadline.yday < DateTime.current.yday %>
                         <td><font color="Purple">●</font></td>
-                      <% elsif task.priority_i18n == "高" && task.status_i18n == "未着手" || task.deadline.yday == DateTime.current.yday %>
+                      <% elsif task.priority_i18n == "高" && task.status_i18n == "未着手" || task.status_i18n != "完了" && task.deadline.yday == DateTime.current.yday %>
                         <td><font color="Red">●</font></td>
                       <% elsif task.priority_i18n == "高" && task.status_i18n == "着手中" || task.priority_i18n == "中" && task.status_i18n == "未着手"%>
                         <td><font color="Yellow">●</font></td>
