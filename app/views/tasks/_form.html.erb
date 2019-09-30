@@ -63,14 +63,14 @@
     <div class="col-3 text-left">
       <strong class="text-primary">ラベル</strong>
     </div>
-    <div class="col-9 text-left">
+    <div class="col-9 text-left d-flex align-items-center">
       <% Label.all.each do |label| %>
         <% if @labels != nil %>
           <%= form.check_box :label_ids, { multiple: true, checked: @labels.include?(label.label) , disabled: label[:disabled], include_hidden: false }, label[:id] %>
         <% else %>
           <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
         <% end %>
-        <%= label.label %>
+        <%= "#{label.label}　" %>
       <% end %>
     </div>
   </div>
