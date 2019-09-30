@@ -17,20 +17,16 @@
     <div id="wrapper">
 
       <header id="header">
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #007BFF;">
-          <% if logged_in? %>
-            <%= link_to "Task", tasks_path, class: "navbar-brand", style: "color: #FFFFFF;" %>
-          <% else %>
-            <%= link_to "Task", new_session_path, class: "navbar-brand", style: "color: #FFFFFF;" %>
-          <% end %>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gnavi" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="gnavi">
-            <ul class="navbar-nav ml-auto float-right">
-              <% if logged_in? %>
+        <% if logged_in? %>
+          <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #007BFF;">
+            <%= link_to "Your Task", tasks_path, class: "navbar-brand", style: "color: #FFFFFF;" %>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#gnavi" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="gnavi">
+              <ul class="navbar-nav ml-auto float-right">
                 <% if current_user.admin? %>
                   <li class="nav-item">
                     <%= link_to "ユーザ管理", admin_users_path, class:"nav-link", style: "color: #FFFFFF;" %>
@@ -42,10 +38,10 @@
                 <li class="nav-item">
                   <%= link_to "ログアウト", session_path(@current_user.id), method: :delete, class:"nav-link", style: "color: #FFFFFF;" %>
                 </li>
-              <% end %>
-            </ul>
-          </div>
-        </nav>
+              </ul>
+            </div>
+          </nav>
+        <% end %>
       </header>
 
       <div class="container-fluid">
