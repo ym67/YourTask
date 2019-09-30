@@ -5,14 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: manyou_development
+  database: your_task_development
 
 test:
   <<: *default
-  database: manyou_test
+  database: your_task_test
 
 production:
   <<: *default
-  database: manyou_production
-  username: manyou
-  password: <%= ENV['MANYOU_DATABASE_PASSWORD'] %>
+  database: your_task_production
+  username: your_task
+  password: <%= ENV['your_task_DATABASE_PASSWORD'] %>
