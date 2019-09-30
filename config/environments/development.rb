@@ -2,8 +2,8 @@ Rails.application.configure do
 
   config.cache_classes = false
   config.eager_load = false
-  # config.consider_all_requests_local = true #開発環境用
-  config.consider_all_requests_local = false #本番環境用
+  config.consider_all_requests_local = true #開発環境用
+  # config.consider_all_requests_local = false #本番環境用
 
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true

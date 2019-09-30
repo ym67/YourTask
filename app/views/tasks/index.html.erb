@@ -30,7 +30,26 @@
             <% if @mytasks != [] %>
               <table width="100%">
                 <thead>
+                  <tr class="text-center border-bottom border-primary" height="45">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th class="d-flex align-items-center"><%= "現在時刻：#{DateTime.current.strftime("%Y年%m月%d日 %H時%M分")}" %></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                  <tr class="border-bottom border-primary">
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
                   <tr class="text-center border-bottom border-primary">
+                    <th></th>
                     <th><%= sort_link(@query, :priority, t('views.tasks.priority')) %></th>
                     <th><%= sort_link(@query, :status, t('views.tasks.status')) %></th>
                     <th><%= sort_link(@query, :name, t('views.tasks.name')) %></th>
@@ -44,11 +63,23 @@
                     <th></th>
                     <th></th>
                     <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <% @mytasks.each do |task| %>
-                    <tr class="text-center border-bottom border-primary">
+                    <tr class="text-center border-bottom border-primary" height="35">
+                      <% if task.status_i18n != "完了" && task.deadline.yday < DateTime.current.yday %>
+                        <td><font color="Purple">●</font></td>
+                      <% elsif task.priority_i18n == "高" && task.status_i18n == "未着手" || task.deadline.yday == DateTime.current.yday %>
+                        <td><font color="Red">●</font></td>
+                      <% elsif task.priority_i18n == "高" && task.status_i18n == "着手中" || task.priority_i18n == "中" && task.status_i18n == "未着手"%>
+                        <td><font color="Yellow">●</font></td>
+                      <% elsif task.priority_i18n == "中" && task.status_i18n == "着手中" || task.priority_i18n == "低" && task.status_i18n == "未着手"%>
+                        <td><font color="Green">●</font></td>
+                      <% else %>
+                        <td><font color="#007BFF">●</font></td>
+                      <% end %>
                       <td><%= task.priority_i18n %></td>
                       <td><%= task.status_i18n %></td>
                       <td><%= link_to task.name, task, class: 'task_name' %></td>
