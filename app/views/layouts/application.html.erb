@@ -46,21 +46,6 @@
 
       <div class="container-fluid">
         <div id="contents">
-          <% if notice != nil %>
-            <div id="notice">
-              <strong><%= notice %></strong>
-              <br>
-              <br>
-            </div>
-          <% else flash != nil %>
-            <div id="flash_msg">
-              <% flash.each do |key, value| %>
-                <strong><%= content_tag(:div, value, class:"#{key}") %></strong>
-              <% end %>
-              <br>
-              <br>
-            </div>
-          <% end %>
           <div id="main_area">
             <%= yield %>
           </div>

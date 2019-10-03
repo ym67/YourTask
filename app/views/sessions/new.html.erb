@@ -1,5 +1,10 @@
 <div class="row">
-  <div class="col-6 offset-3">
+  <div class="col-8 offset-2">
+
+    <h2><font color="#007BFF">Your Task</font></h2>
+    <font color="#007BFF">シンプルな個人向けタスク管理アプリです。</font>
+    <br>
+    <br>
 
     <div class="card border-primary rounded-0">
       <div class="card-header bg-transparent border-primary text-center">
@@ -7,6 +12,22 @@
       </div>
       <div class="card-body">
         <%= form_with(scope: :session, url: sessions_path, local: true) do |form| %>
+
+          <% if flash != nil %>
+            <div id="flash_msg">
+              <% flash.each do |key, value| %>
+                <% if key == "danger" %>
+                  <div class="alert alert-danger rounded-0" role="alert">
+                    <strong><%= content_tag(:div, value, class:"#{key}") %></strong>
+                  </div>
+                <% else %>
+                  <strong><%= content_tag(:div, value, class:"#{key}") %></strong>
+                  <br>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+
           <div class="row d-flex align-items-center form-group">
             <div class="col-4 text-left">
               <strong class="text-primary"><%= t('views.sessions.email') %></strong>

@@ -14,6 +14,7 @@ body, #wrapper {
   margin-bottom: 100px;
 }
 
+// メッセージ系
 #notice {
   text-align: center;
 }
@@ -21,6 +22,14 @@ body, #wrapper {
 #flash_msg {
   text-align: center;
 }
+
+// エラー関係
+.field_with_errors {
+  padding: 1px;
+  background-color: Red;
+  display: table;
+}
+
 
 // ヘッダー
 .navbar .navbar-brand {

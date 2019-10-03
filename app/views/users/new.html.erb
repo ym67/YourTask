@@ -1,6 +1,19 @@
 <div class="row">
   <div class="col-8 offset-2">
 
+    <h2><font color="#007BFF">Your Task</font></h2>
+    <font color="#007BFF">シンプルな個人向けタスク管理アプリです。</font>
+    <br>
+    <br>
+
+    <% if notice != nil %>
+      <div id="notice">
+        <strong><%= notice %></strong>
+        <br>
+        <br>
+      </div>
+    <% end %>
+
     <div class="card border-primary rounded-0">
       <div class="card-header bg-transparent border-primary text-center">
         <strong class="text-primary"><%= t('views.users.new_html.title') %></strong>
